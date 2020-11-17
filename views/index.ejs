@@ -15,6 +15,7 @@
   </head>
 
   <body>
+    <span id="productos" hidden> <%= JSON.stringify(productos) %> </span>
     <div id="container">
       <nav class="header">
         <img src="/img/logo.PNG" class="titulo-header" />
@@ -37,7 +38,26 @@
           <div id="header-carrito">
             <span class="header-carrito-titulo">Mi carrito</span>
           </div>
-          <div class="productos-carrito"></div>
+          <div class="productos-carrito">
+            <div id="div" class="producto-carrito">
+              <img class="imagen-producto-carrito" src="../img/i5.png" />
+              <div class="detalles-producto-carrito">
+                <span class="titulo-producto-carrito"
+                  >Intel Core i5 10600k</span
+                >
+                <div class="eliminar-cantidad">
+                  <span>Cantidad</span>
+                  <input
+                    type="number"
+                    class="cantidad-producto-carrito"
+                    value="1"
+                  />
+                  <button class="boton-eliminar-carrito">X</button>
+                </div>
+                <span class="precio-producto-carrito">$256</span>
+              </div>
+            </div>
+          </div>
           <div class="info-carrito">
             <div class="info-carrito-total">
               <span>Total</span>
@@ -47,9 +67,7 @@
           </div>
         </div>
       </div>
-      <footer>
-        
-      </footer>
+      <footer></footer>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/script.js"></script>

@@ -32,7 +32,7 @@ productos.push(new Producto("Intel Core i9 10900K", 488, "i9.png"));
 productos.push(new Producto("AMD Ryzen 5 5600X", 299, "ryzen5.png"));
 productos.push(new Producto("AMD Ryzen 7 5800X", 449, "ryzen7.png"));
 productos.push(new Producto("AMD Ryzen 9 5900X", 549, "ryzen9.png"));
-productos.push(new Producto("AMD Ryzen 9 5950X", 399, "ryzen9.png"));
+productos.push(new Producto("AMD Ryzen 9 5950X", 799, "ryzen9.png"));
 
 //Importo los módulos que me hacen falta
 const express = require("express");

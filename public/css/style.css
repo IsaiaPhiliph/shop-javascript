@@ -93,6 +93,7 @@
 }
 .carrito-escondido {
   width: 0px;
+  display: none;
 }
 
 .boton-add-carrito {
