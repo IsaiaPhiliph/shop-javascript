@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build your own!</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div id="container">
+      <nav class="header">
+        <img src="/img/logo.PNG" class="titulo-header" />
+        <button class="boton-mostrar-carrito">Mi Carrito</button>
+      </nav>
+      <div id="content">
+        <div id="productos">
+          <% productos.forEach(prod => { %>
+          <div class="carta-producto">
+            <img class="imagen-producto" src="img/<%=prod.img %>" />
+            <span class="titulo-producto"><%= prod.nombre %> </span>
+            <div class="detalles-producto">
+              <span class="precio-producto">$<%= prod.precio %></span>
+              <button class="boton-add-carrito">Añadir al carrito</button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <div class="carrito carrito-escondido">
+          <div id="header-carrito">
+            <span class="header-carrito-titulo">Mi carrito</span>
+          </div>
+          <div class="productos-carrito"></div>
+          <div class="info-carrito">
+            <div class="info-carrito-total">
+              <span>Total</span>
+              <span id="precio-total-carrito">$0</span>
+            </div>
+            <button class="info-carrito-boton">Realizar pedido</button>
+          </div>
+        </div>
+      </div>
+      <footer>
+        
+      </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
