@@ -59,6 +59,6 @@ app.get("/", function (req, res) {
 });
 
 //Arranco el server en el puerto 10022 y hago un log para comprobar si esta escuchando
-app.listen(10022, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("server is up");
 });
