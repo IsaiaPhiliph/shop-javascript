@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
         <title>Build your own! Realizar pedido</title>
-        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/styleRealizarPedido.css" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
@@ -14,6 +14,55 @@
         <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     </head>
     <body>
-        <h1>Realizar pedido</h1>
+        <span id="array-carrito-post" hidden><%= arrCarrito[0].nombre %></span>
+        <div class="container">
+            <nav class="header">
+                <img src="/img/logo.PNG" class="titulo-header" />
+                <form action="/" method="post">
+                    <input type="hidden" name="carritoVolver" value="<%= JSON.stringify(arrCarrito) %> ">
+                    <button class="boton-volver">Volver</button>
+                </form>
+            </nav>
+
+            <div class="content">
+                <div class="todos-productos-carrito">
+                    <div class="todos-productos-carrito-titulo">
+                        <span>Articulos del <strong>carrito</strong></span>
+                    </div>
+                    <div class="todos-productos-carrito-productos">
+                        <table>
+                            <tr>
+                                <th>Articulo</th>
+                                <th>Precio</th>
+                                <th>Unidades</th>
+                                <th>Total</th>
+                            </tr>
+                            <% arrCarrito.forEach(p => { %>
+                            <tr>
+                                <td class="tabla-celda-articulo">
+                                    <img class="todos-productos-carrito-imagen" src="<%=p.img%>">
+
+                                </img>
+                                    <%= p.nombre %></td>
+
+                                <td>$<%= p.precio %></td>
+
+                                <td><%= p.cant %></td>
+
+                                <td>$<%= p.precioFinal %></td>
+                            </tr>
+                            <% }) %>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-realizar-pedido">
+                    <span>Subtotal (<%= arrCarrito.length %>  productos):</span>
+                    <strong>$<%= precioTotalCarrito %> </strong>
+                    <button class="panel-boton">
+                        Realizar pedido
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

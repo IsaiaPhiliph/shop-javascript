@@ -1,4 +1,6 @@
 var productos = document.getElementById('arrayProductos').innerText;
+var carro = document.getElementById('arrayCarro');
+carro = JSON.parse(carro.innerText);
 productos = JSON.parse(productos);
 //Declaro la clase producto
 class ProductoCarrito {
@@ -40,10 +42,21 @@ var cantidadProductoCarrito = document.getElementsByClassName(
 var botonAniadirCarrito = document.getElementsByClassName('boton-add-carrito');
 
 var inputArrayCarrito = document.getElementById('input-array-carrito');
+var inputPrecioTotal = document.getElementById('precioTotalCarrito');
 
 botonMiCarrito.addEventListener('click', () => {
     carrito.classList.toggle('carrito-escondido');
 });
+
+if (carro.length > 0) {
+    carro.forEach((p) => {
+        var obj = new ProductoCarrito(p.nombre, p.precio, p.img, p.cant);
+        arrayCarrito.push(obj);
+        addProductoACarrito(obj);
+        actualizarProductosCarrito();
+        carrito.classList.remove('carrito-escondido');
+    });
+}
 
 for (let i = 0; i < botonAniadirCarrito.length; i++) {
     botonAniadirCarrito[i].addEventListener('click', (e) => {
@@ -89,6 +102,7 @@ function actualizarProductosCarrito() {
     }
     precioTotalCarrito.innerText = '$' + totalCarrito;
     inputArrayCarrito.setAttribute('value', JSON.stringify(arrayCarrito));
+    inputPrecioTotal.setAttribute('value', totalCarrito);
 }
 
 function addProductoACarrito(producto) {

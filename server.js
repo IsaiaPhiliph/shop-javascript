@@ -6,6 +6,7 @@ function Producto(nombre, precio, img) {
 }
 //Declaro el array que contendra los productos
 const productos = [];
+var carrito = [];
 
 //Meto al array algunos productos iniciales,
 //para que la pagina no este vacia cuando reinicie el server
@@ -55,15 +56,29 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
     //Como respuesta, le digo que renderize el archivo "index" situado en la carpeta "views"
     //Y le paso el array de productos para que pueda mostrarlos
-    res.render('index', { productos: productos });
+    res.render('index', { productos: productos, carrito });
+});
+
+app.post('/', (req, res) => {
+    var carrito = req.body.carritoVolver;
+    carrito = JSON.parse(carrito);
+    res.render('index', { productos: productos, carrito });
 });
 
 //Cuando se haga una peticion post sobre /realizarPedido,
 app.post('/realizarPedido', (req, res) => {
-    res.render('realizarPedido');
+    var carrito = req.body.arrayCarrito;
+    var totalCarrito = req.body.precioTotalCarrito;
+    carrito = JSON.parse(carrito);
+    res.render('realizarPedido', {
+        arrCarrito: carrito,
+        precioTotalCarrito: totalCarrito
+    });
 });
 
-//Arranco el server en el puerto 10022 y hago un log para comprobar si esta escuchando
+//Arranco el server en el puerto 3000,
+//o en el puerto correspondiente si la app esta hosteada en algun sitio
+//y hago un log para comprobar si esta escuchando
 app.listen(process.env.PORT || 3000, function () {
     console.log('server is up');
 });
