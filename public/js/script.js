@@ -118,6 +118,7 @@ function addProductoACarrito(producto) {
                   <span>Cantidad</span>
                   <input
                     type="number"
+                    min="1"
                     class="cantidad-producto-carrito"
                     value="1"
                   />

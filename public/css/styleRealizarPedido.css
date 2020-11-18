@@ -91,7 +91,7 @@ tr:hover {
     height: 100px;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 .panel-realizar-pedido > * {
     margin-top: 5px;
@@ -103,8 +103,9 @@ tr:hover {
     background-color: black;
     color: white;
     font-weight: bolder;
+    font-size: 1.3em;
     padding: 8px;
-    border-radius: 7px;
+    border-radius: 5px;
 }
 
 .todos-productos-carrito-titulo {
