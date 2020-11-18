@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Build your own!</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Build your own!</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    </head>
 
-  <body>
-    <span id="productos" hidden> <%= JSON.stringify(productos) %> </span>
-    <div id="container">
-      <nav class="header">
-        <img src="/img/logo.PNG" class="titulo-header" />
-        <button class="boton-mostrar-carrito">Mi Carrito</button>
-      </nav>
-      <div id="content">
-        <div id="productos">
-          <% productos.forEach(prod => { %>
-          <div class="carta-producto">
-            <img class="imagen-producto" src="img/<%=prod.img %>" />
-            <span class="titulo-producto"><%= prod.nombre %> </span>
-            <div class="detalles-producto">
-              <span class="precio-producto">$<%= prod.precio %></span>
-              <button class="boton-add-carrito">Añadir al carrito</button>
-            </div>
-          </div>
-          <% }) %>
-        </div>
-        <div class="carrito carrito-escondido">
-          <div id="header-carrito">
-            <span class="header-carrito-titulo">Mi carrito</span>
-          </div>
-          <div class="productos-carrito">
-            <div id="div" class="producto-carrito">
-              <img class="imagen-producto-carrito" src="../img/i5.png" />
-              <div class="detalles-producto-carrito">
-                <span class="titulo-producto-carrito"
-                  >Intel Core i5 10600k</span
-                >
-                <div class="eliminar-cantidad">
-                  <span>Cantidad</span>
-                  <input
-                    type="number"
-                    class="cantidad-producto-carrito"
-                    value="1"
-                  />
-                  <button class="boton-eliminar-carrito">X</button>
+    <body>
+        <span id="arrayProductos" hidden
+            ><%= JSON.stringify(productos) %>
+        </span>
+        <div id="container">
+            <nav class="header">
+                <img src="/img/logo.PNG" class="titulo-header" />
+                <button class="boton-mostrar-carrito">Mi Carrito</button>
+            </nav>
+            <div id="content">
+                <div id="productos">
+                    <% productos.forEach(prod => { %>
+                    <div class="carta-producto">
+                        <img class="imagen-producto" src="img/<%=prod.img %>" />
+                        <span class="titulo-producto"><%= prod.nombre %> </span>
+                        <div class="detalles-producto">
+                            <span class="precio-producto"
+                                >$<%= prod.precio %></span
+                            >
+                            <button class="boton-add-carrito">
+                                Añadir al carrito
+                            </button>
+                        </div>
+                    </div>
+                    <% }) %>
                 </div>
-                <span class="precio-producto-carrito">$256</span>
-              </div>
+                <div class="carrito carrito-escondido">
+                    <div id="header-carrito">
+                        <span class="header-carrito-titulo">Mi carrito</span>
+                    </div>
+                    <div class="productos-carrito"></div>
+                    <div class="info-carrito">
+                        <div class="info-carrito-total">
+                            <span>Total</span>
+                            <span id="precio-total-carrito">$0</span>
+                        </div>
+                        <form
+                            action="/realizarPedido"
+                            method="post"
+                            id="form-realizar-pedido"
+                        >
+                            <input
+                                type="hidden"
+                                name="arrayCarrito"
+                                id="input-array-carrito"
+                                value=""
+                            />
+                            <button class="info-carrito-boton">Realizar pedido
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="info-carrito">
-            <div class="info-carrito-total">
-              <span>Total</span>
-              <span id="precio-total-carrito">$0</span>
-            </div>
-            <button class="info-carrito-boton">Realizar pedido</button>
-          </div>
+            <footer></footer>
         </div>
-      </div>
-      <footer></footer>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/script.js"></script>
-  </body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="../js/script.js"></script>
+    </body>
 </html>
