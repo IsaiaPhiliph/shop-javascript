@@ -20,13 +20,24 @@
 .header {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     border-bottom: 1px solid lightgray;
     align-items: center;
+    background-color: white;
+}
+input.header-busqueda {
+    height: 10px;
+    width: 450px;
+    margin-left: 18px;
+    padding: 19px;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+    background: #fff
+        url(https://cdn.pccomponentes.com/img/css/lupa-buscador-black.png) 98%
+        no-repeat;
 }
 .boton-mostrar-carrito {
     background-color: white;
-    margin-left: auto;
     border: none;
     font-size: 1.3em;
     padding: 20px;
@@ -55,6 +66,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 80%;
 }
 .carta-producto {
     display: flex;
@@ -92,13 +104,19 @@
     width: 350px;
     flex-shrink: 0;
     box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.23);
+    position: -webkit-sticky;
+    position: fixed;
+    right: 0%;
+    background-color: white;
     transition: all 400ms ease;
 }
+
 .carrito-escondido {
-    width: 0px;
+    right: -80%;
+}
+.escondido {
     display: none;
 }
-
 .boton-add-carrito {
     border: none;
     flex-shrink: 0;
@@ -202,9 +220,18 @@
     font-weight: bold;
     outline: none;
 }
+
+.fixed-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
 @media (max-width: 600px) {
     #content {
         flex-direction: column-reverse;
+
+        align-items: center;
     }
     .titulo-header {
         height: 35px;
@@ -220,5 +247,30 @@
     }
     .carrito-escondido {
         display: none;
+    }
+    /* .header-busqueda {
+        align-self: flex-end;
+    } */
+    .header {
+        flex-direction: column;
+    }
+    #productos {
+        max-width: 100%;
+    }
+    .carrito-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 115px;
+        background-color: white;
+    }
+}
+@media (max-width: 1500px) {
+    #productos {
+        max-width: 68%;
+    }
+}
+@media (max-width: 970px) {
+    #productos {
+        max-width: 68%;
     }
 }

@@ -41,8 +41,27 @@ var cantidadProductoCarrito = document.getElementsByClassName(
 
 var botonAniadirCarrito = document.getElementsByClassName('boton-add-carrito');
 
+var barraBusqueda = document.querySelector('.header-busqueda');
+
 var inputArrayCarrito = document.getElementById('input-array-carrito');
 var inputPrecioTotal = document.getElementById('precioTotalCarrito');
+
+var productos = document.querySelectorAll('.carta-producto');
+
+barraBusqueda.addEventListener('keyup', (e) => {
+    let valorBusqueda = e.target.value.replaceAll(' ', '');
+    productos.forEach((element) => {
+        var titulo = element
+            .querySelector('.titulo-producto')
+            .innerText.replaceAll(' ', '')
+            .toLowerCase();
+        if (titulo.includes(valorBusqueda)) {
+            element.classList.remove('escondido');
+        } else {
+            element.classList.add('escondido');
+        }
+    });
+});
 
 botonMiCarrito.addEventListener('click', () => {
     carrito.classList.toggle('carrito-escondido');

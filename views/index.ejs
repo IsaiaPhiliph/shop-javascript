@@ -23,8 +23,13 @@
         </span>
         <span id="arrayCarro" hidden><%= JSON.stringify(carrito) %> </span>
         <div id="container">
-            <nav class="header">
+            <nav class="header fixed-top">
                 <img src="/img/logo.PNG" class="titulo-header" />
+                <input
+                    type="text"
+                    class="header-busqueda"
+                    placeholder="Buscar"
+                />
                 <button class="boton-mostrar-carrito">Mi Carrito</button>
             </nav>
             <div id="content">
