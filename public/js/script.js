@@ -43,13 +43,17 @@ var botonAniadirCarrito = document.getElementsByClassName('boton-add-carrito');
 
 var barraBusqueda = document.querySelector('.header-busqueda');
 
+var botonCerrarCarritoHeader = document.querySelector(
+    '.boton-cerrar-carrito-header'
+);
+
 var inputArrayCarrito = document.getElementById('input-array-carrito');
 var inputPrecioTotal = document.getElementById('precioTotalCarrito');
 
 var productos = document.querySelectorAll('.carta-producto');
 
 barraBusqueda.addEventListener('keyup', (e) => {
-    let valorBusqueda = e.target.value.replaceAll(' ', '');
+    let valorBusqueda = e.target.value.replaceAll(' ', '').toLowerCase();
     productos.forEach((element) => {
         var titulo = element
             .querySelector('.titulo-producto')
@@ -65,6 +69,9 @@ barraBusqueda.addEventListener('keyup', (e) => {
 
 botonMiCarrito.addEventListener('click', () => {
     carrito.classList.toggle('carrito-escondido');
+});
+botonCerrarCarritoHeader.addEventListener('click', () => {
+    carrito.classList.add('carrito-escondido');
 });
 
 if (carro.length > 0) {

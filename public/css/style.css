@@ -58,7 +58,7 @@ input.header-busqueda {
 .titulo-header {
     height: 60px;
     flex-shrink: 0;
-    margin-left: 15px;
+    margin: 15px;
 
     color: rgb(105, 105, 105);
 }
@@ -88,8 +88,24 @@ input.header-busqueda {
     justify-content: space-between;
     align-items: center;
 }
+.boton-cerrar-carrito-header {
+    border: none;
+    flex-shrink: 0;
+    background-color: black;
+    color: white;
+    font-weight: bolder;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+    border-radius: 3px;
+    outline: none;
+    margin-left: 3px;
+}
 .precio-producto {
     font-weight: bold;
+}
+.productos-carrito {
+    overflow: auto;
 }
 .titulo-producto {
     margin-top: 15px;
@@ -102,11 +118,14 @@ input.header-busqueda {
     margin-bottom: 8px;
     /* border-left: 3px solid lightgray; */
     width: 350px;
+    height: 93%;
     flex-shrink: 0;
     box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.23);
     position: -webkit-sticky;
     position: fixed;
     right: 0%;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: white;
     transition: all 400ms ease;
 }
@@ -238,12 +257,19 @@ input.header-busqueda {
     }
     .boton-mostrar-carrito {
         font-size: 1em;
+        width: 100%;
     }
     .producto-carrito {
         justify-content: center;
     }
     .carrito {
         width: auto;
+        position: sticky;
+        top: 0px;
+        max-height: 245px;
+    }
+    .productos-carrito {
+        overflow: auto;
     }
     .carrito-escondido {
         display: none;
@@ -253,6 +279,7 @@ input.header-busqueda {
     } */
     .header {
         flex-direction: column;
+        position: relative;
     }
     #productos {
         max-width: 100%;
@@ -262,6 +289,17 @@ input.header-busqueda {
         position: sticky;
         top: 115px;
         background-color: white;
+    }
+    input.header-busqueda {
+        height: 10px;
+        width: 250px;
+        margin-left: 18px;
+        padding: 19px;
+        border-radius: 8px;
+        border: 1px solid lightgray;
+        background: #fff
+            url(https://cdn.pccomponentes.com/img/css/lupa-buscador-black.png)
+            98% no-repeat;
     }
 }
 @media (max-width: 1500px) {
