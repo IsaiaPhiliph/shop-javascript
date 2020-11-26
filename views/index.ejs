@@ -86,8 +86,26 @@
                     </div>
                 </div>
             </div>
-            <footer></footer>
         </div>
+        <footer>
+            <h1>Contacta con nostros</h1>
+            <form action="" id="contacto" name="contacto">
+                <input type="text" name="nombre" placeholder="Nombre" />
+                <input type="text" name="email" placeholder="Email" />
+                <input
+                    type="text"
+                    name="telefono"
+                    placeholder="Numero de telefono"
+                />
+                <textarea
+                    name="mensaje"
+                    cols="30"
+                    rows="5"
+                    placeholder="Tu mensaje"
+                ></textarea>
+                <input type="button" onclick="validar()" value="Enviar" />
+            </form>
+        </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="../js/script.js"></script>
     </body>

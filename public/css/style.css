@@ -78,7 +78,6 @@ input.header-busqueda {
     flex-basis: 18%;
 }
 .carta-producto:hover {
-    cursor: pointer;
     background-color: rgb(240, 240, 240);
 }
 .detalles-producto {
@@ -149,6 +148,9 @@ input.header-busqueda {
     border-radius: 3px;
     outline: none;
 }
+button:hover {
+    cursor: pointer;
+}
 #header-carrito {
     display: flex;
     justify-content: space-between;
@@ -170,7 +172,7 @@ input.header-busqueda {
     flex-shrink: 0;
 }
 .producto-carrito:hover {
-    box-shadow: 0 0 2pt 2pt lightgray;
+    box-shadow: 0 0 2pt 1pt lightgray;
 }
 .detalles-producto-carrito {
     display: flex;
@@ -246,6 +248,50 @@ input.header-busqueda {
     top: 0px;
 }
 
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+}
+footer > form {
+    display: flex;
+    flex-direction: column;
+}
+
+footer > h1 {
+    color: white;
+    margin: 15px;
+}
+
+form > input {
+    margin: 4px;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+}
+form > input:focus {
+    outline: none;
+}
+form > textarea {
+    margin: 4px;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+}
+form > textarea:focus {
+    outline: none;
+}
+form > button {
+    margin: 4px;
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 12px;
+}
+form > button:focus {
+    outline: none;
+}
 @media (max-width: 600px) {
     #content {
         flex-direction: column-reverse;
@@ -302,6 +348,7 @@ input.header-busqueda {
             98% no-repeat;
     }
 }
+
 @media (max-width: 1500px) {
     #productos {
         max-width: 68%;
