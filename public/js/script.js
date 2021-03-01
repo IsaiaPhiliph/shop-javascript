@@ -1,56 +1,63 @@
-var productos = document.getElementById('arrayProductos').innerText;
-var carro = document.getElementById('arrayCarro');
-carro = JSON.parse(carro.innerText);
-productos = JSON.parse(productos);
-//Declaro la clase producto
-class ProductoCarrito {
-    constructor(nombre, precio, img, cant = 1) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.img = img;
-        this.cant = cant;
-        this.precioFinal = this.precio * this.cant;
-    }
-    aumentarCantidad() {
-        this.cant++;
-    }
-    actualizarPrecio() {
-        this.precioFinal = this.precio * this.cant;
-    }
-    setCantidad(c) {
-        this.cant = c;
-    }
-}
+import { ProductoCarrito } from './ProductoCarrito.js';
+import { validar } from './validacion.js';
+import {
+    contadorVisitas,
+    botonMiCarrito,
+    carrito,
+    productosCarrito,
+    cantidadProductoCarrito,
+    botonAniadirCarrito,
+    barraBusqueda,
+    botonCerrarCarritoHeader,
+    formularioContacto,
+    inputArrayCarrito,
+    inputPrecioTotal,
+    botonRealizarPedido,
+    precioBitcoin,
+    productos
+} from './dom.js';
+import {
+    actualizarProductosCarrito,
+    addProductoACarrito
+} from './funcionesInterfaz.js';
+import { precios } from './api.js';
 var arrayCarrito = [];
+var visitas = 1;
 
-var botonMiCarrito = document.getElementsByClassName(
-    'boton-mostrar-carrito'
-)[0];
+if (localStorage.visitas) {
+    visitas = parseInt(localStorage.visitas);
+    visitas++;
+    localStorage.visitas = visitas;
+    contadorVisitas.innerText = visitas;
+} else {
+    contadorVisitas.innerText = visitas;
+    localStorage.visitas = visitas;
+    alert(
+        'El la primera vez que visitas el sitio, disfruta y no te gastes todo tu dinero...'
+    );
+}
 
-var carrito = document.getElementsByClassName('carrito')[0];
+if (localStorage.carrito) {
+    let carritoStorage = localStorage.carrito;
+    carritoStorage = JSON.parse(carritoStorage);
+    carritoStorage.forEach((p) => {
+        let obj = new ProductoCarrito(p.nombre, p.precio, p.img, p.cant);
+        arrayCarrito.push(obj);
+        addProductoACarrito(obj, productosCarrito, arrayCarrito);
+        actualizarProductosCarrito(arrayCarrito);
+        carrito.classList.remove('carrito-escondido');
+    });
+} else {
+    arrayCarrito = [];
+}
 
-var productosCarrito = document.getElementsByClassName('productos-carrito')[0];
+precios.then((response) => {
+    addPrecioBitcoin(response.data);
+});
 
-var botonEliminarDeCarrito = document.getElementsByClassName(
-    'boton-eliminar-carrito'
-);
-
-var cantidadProductoCarrito = document.getElementsByClassName(
-    'cantidad-producto-carrito'
-);
-
-var botonAniadirCarrito = document.getElementsByClassName('boton-add-carrito');
-
-var barraBusqueda = document.querySelector('.header-busqueda');
-
-var botonCerrarCarritoHeader = document.querySelector(
-    '.boton-cerrar-carrito-header'
-);
-
-var inputArrayCarrito = document.getElementById('input-array-carrito');
-var inputPrecioTotal = document.getElementById('precioTotalCarrito');
-
-var productos = document.querySelectorAll('.carta-producto');
+function addPrecioBitcoin(objeto) {
+    precioBitcoin.innerText = objeto.EUR + ' EUR | ' + objeto.USD + ' $';
+}
 
 barraBusqueda.addEventListener('keyup', (e) => {
     let valorBusqueda = e.target.value.replaceAll(' ', '').toLowerCase();
@@ -66,23 +73,15 @@ barraBusqueda.addEventListener('keyup', (e) => {
         }
     });
 });
-
+botonRealizarPedido.addEventListener('click', (e) => {
+    e.preventDefault();
+});
 botonMiCarrito.addEventListener('click', () => {
     carrito.classList.toggle('carrito-escondido');
 });
 botonCerrarCarritoHeader.addEventListener('click', () => {
     carrito.classList.add('carrito-escondido');
 });
-
-if (carro.length > 0) {
-    carro.forEach((p) => {
-        var obj = new ProductoCarrito(p.nombre, p.precio, p.img, p.cant);
-        arrayCarrito.push(obj);
-        addProductoACarrito(obj);
-        actualizarProductosCarrito();
-        carrito.classList.remove('carrito-escondido');
-    });
-}
 
 for (let i = 0; i < botonAniadirCarrito.length; i++) {
     botonAniadirCarrito[i].addEventListener('click', (e) => {
@@ -99,116 +98,18 @@ for (let i = 0; i < botonAniadirCarrito.length; i++) {
             arrayCarrito[
                 arrayCarrito.findIndex((p) => p.nombre == nombre)
             ].actualizarPrecio();
-            actualizarProductosCarrito();
+            actualizarProductosCarrito(arrayCarrito);
         } else {
-            pCarrito = new ProductoCarrito(nombre, precio, img);
+            let pCarrito = new ProductoCarrito(nombre, precio, img);
             arrayCarrito.push(pCarrito);
-            addProductoACarrito(pCarrito);
-            actualizarProductosCarrito();
+            addProductoACarrito(pCarrito, productosCarrito, arrayCarrito);
+            actualizarProductosCarrito(arrayCarrito);
             carrito.classList.remove('carrito-escondido');
         }
     });
 }
 
-function actualizarProductosCarrito() {
-    var productoCarrito = document.getElementsByClassName('producto-carrito');
-    var precioTotalCarrito = document.getElementById('precio-total-carrito');
-    var totalCarrito = 0;
-
-    for (let i = 0; i < productoCarrito.length; i++) {
-        var nombre =
-            productoCarrito[i].lastElementChild.firstElementChild.innerText;
-        var prod = arrayCarrito.find((p) => p.nombre == nombre);
-        totalCarrito += prod.precioFinal;
-        productoCarrito[i].lastElementChild.lastElementChild.innerText =
-            '$' + prod.precioFinal;
-        productoCarrito[i].lastElementChild.getElementsByClassName(
-            'cantidad-producto-carrito'
-        )[0].value = prod.cant;
-    }
-    precioTotalCarrito.innerText = '$' + totalCarrito;
-    inputArrayCarrito.setAttribute('value', JSON.stringify(arrayCarrito));
-    inputPrecioTotal.setAttribute('value', totalCarrito);
-}
-
-function addProductoACarrito(producto) {
-    var div = document.createElement('div');
-    var prod = `
-  <div id="div" class="producto-carrito">
-              <img class="imagen-producto-carrito" src="${producto.img}" />
-              <div class="detalles-producto-carrito">
-                <span class="titulo-producto-carrito"
-                  >${producto.nombre}</span
-                >
-                <div class="eliminar-cantidad">
-                  <span>Cantidad</span>
-                  <input
-                    type="number"
-                    min="1"
-                    class="cantidad-producto-carrito"
-                    value="1"
-                  />
-                  <button class="boton-eliminar-carrito">X</button>
-                </div>
-                <span class="precio-producto-carrito">$${producto.precioFinal}</span>
-              </div>
-            </div>
-  `;
-    div.innerHTML = prod;
-
-    var cantidadProducto = div.firstElementChild.getElementsByClassName(
-        'cantidad-producto-carrito'
-    )[0];
-
-    botonEliminarDeCarrito = div.getElementsByClassName(
-        'boton-eliminar-carrito'
-    )[0];
-
-    cantidadProducto.addEventListener('change', (e) => {
-        var cant = cantidadProducto.value;
-        var prodCarrito =
-            arrayCarrito[
-                arrayCarrito.findIndex((p) => p.nombre == producto.nombre)
-            ];
-        prodCarrito.setCantidad(cant);
-        prodCarrito.actualizarPrecio();
-        actualizarProductosCarrito();
-        console.log('Camiado valor carrito a ' + cant);
-    });
-
-    botonEliminarDeCarrito.addEventListener('click', (e) => {
-        var indice = arrayCarrito.findIndex((p) => p.nombre == producto.nombre);
-        e.target.parentElement.parentElement.parentElement.remove();
-        arrayCarrito.splice(indice, 1);
-        actualizarProductosCarrito();
-    });
-
-    productosCarrito.append(div);
-}
-
-function validar() {
-    let form = document.contacto;
-    let valido = true;
-
-    if (!/(^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,16})+$/.test(form.nombre.value)) {
-        form.nombre.style.border = '2px solid red';
-        valido = false;
-    }
-    if (
-        !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)
-    ) {
-        form.email.style.border = '2px solid red';
-        valido = false;
-    }
-    if (
-        !/^\(?([\d]{3})\)?[-.]?([\d]{3})[-.]?([\d]{3})$/.test(
-            form.telefono.value
-        )
-    ) {
-        form.telefono.style.border = '2px solid red';
-        valido = false;
-    }
-    if (valido) {
-        document.getElementById('contacto').submit();
-    }
-}
+formularioContacto.addEventListener('submit', (e) => {
+    e.preventDefault();
+    validar();
+});

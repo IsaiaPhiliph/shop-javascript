@@ -21,12 +21,13 @@
         <span id="arrayProductos" hidden
             ><%= JSON.stringify(productos) %>
         </span>
-        <span id="arrayCarro" hidden><%= JSON.stringify(carrito) %> </span>
         <div id="container">
             <nav class="header fixed-top">
                 <a href="/"
                     ><img src="/img/logo.PNG" class="titulo-header"
                 /></a>
+                Precio Bitcoin: <span id="bitcoin"></span> Visitas:
+                <span id="contadorVisitas"></span>
                 <input
                     type="text"
                     class="header-busqueda"
@@ -62,11 +63,7 @@
                             <span>Total</span>
                             <span id="precio-total-carrito">$0</span>
                         </div>
-                        <form
-                            action="/realizarPedido"
-                            method="post"
-                            id="form-realizar-pedido"
-                        >
+                        <form method="post" id="form-realizar-pedido">
                             <input
                                 type="hidden"
                                 name="arrayCarrito"
@@ -103,10 +100,11 @@
                     rows="5"
                     placeholder="Tu mensaje"
                 ></textarea>
-                <input type="button" onclick="validar()" value="Enviar" />
+                <input type="submit" value="Enviar" />
             </form>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../js/script.js"></script>
+        <script src="../js/script.js" type="module"></script>
     </body>
 </html>

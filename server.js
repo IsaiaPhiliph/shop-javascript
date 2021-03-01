@@ -56,24 +56,7 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
     //Como respuesta, le digo que renderize el archivo "index" situado en la carpeta "views"
     //Y le paso el array de productos para que pueda mostrarlos
-    res.render('index', { productos: productos, carrito });
-});
-
-app.post('/', (req, res) => {
-    var carrito = req.body.carritoVolver;
-    carrito = JSON.parse(carrito);
-    res.render('index', { productos: productos, carrito });
-});
-
-//Cuando se haga una peticion post sobre /realizarPedido,
-app.post('/realizarPedido', (req, res) => {
-    var carrito = req.body.arrayCarrito;
-    var totalCarrito = req.body.precioTotalCarrito;
-    carrito = JSON.parse(carrito);
-    res.render('realizarPedido', {
-        arrCarrito: carrito,
-        precioTotalCarrito: totalCarrito
-    });
+    res.render('index', { productos: productos });
 });
 
 //Arranco el server en el puerto 3000,
